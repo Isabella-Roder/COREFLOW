@@ -38,6 +38,7 @@ public class ColaboradorService {
         colaborador.setAtivo(dadosAtualizados.getAtivo());
         colaborador.setPerfil(dadosAtualizados.getPerfil());
         colaborador.setEmpresa(dadosAtualizados.getEmpresa());
+        colaborador.setDepartamento(dadosAtualizados.getDepartamento());
 
         return colaboradorRepository.save(colaborador);
     }
