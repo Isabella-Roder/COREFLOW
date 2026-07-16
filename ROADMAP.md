@@ -10,10 +10,19 @@
 
 ## Fase 2 - Empresas e Usuarios
 
-- Cadastro de empresas.
-- Cadastro de usuarios.
-- Login.
-- Perfis e permissoes basicas.
+- [x] CRUD de empresas no backend.
+  - [x] Cadastrar empresa.
+  - [x] Listar empresas.
+  - [x] Buscar empresa por ID.
+  - [x] Atualizar empresa.
+  - [x] Deletar empresa.
+- [x] Cadastro de colaboradores.
+- [x] Vinculo de colaboradores com empresa.
+- [x] CRUD de departamentos no backend.
+- [x] Vinculo de departamentos com empresa.
+- [ ] Cadastro de usuarios para login.
+- [ ] Login.
+- [ ] Perfis e permissoes basicas.
 
 ## Fase 3 - Cadastros Operacionais
 
@@ -48,3 +57,4 @@
 - Graficos.
 - Exportacao CSV/PDF.
 - Indicadores financeiros.
+

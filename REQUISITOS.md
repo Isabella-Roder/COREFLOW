@@ -21,14 +21,20 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 
 ### 3.1 Empresas
 
-- [ ] Cadastrar empresa.
-- [ ] Editar empresa.
-- [ ] Listar empresas.
-- [ ] Vincular usuarios a uma empresa.
+- [x] Cadastrar empresa.
+- [x] Listar empresas.
+- [x] Buscar empresa por ID.
+- [x] Editar empresa.
+- [x] Excluir empresa.
+- [x] Vincular colaboradores a uma empresa.
+- [x] Cadastrar departamentos por empresa.
+- [x] Listar departamentos por empresa.
 
 ### 3.2 Usuarios e Permissoes
 
-- [ ] Cadastro de usuarios.
+- [x] Cadastro de colaboradores.
+- [x] Perfis basicos de colaborador.
+- [ ] Cadastro de usuarios para login.
 - [ ] Login.
 - [ ] Perfis de acesso.
 - [ ] Permissoes por modulo.
@@ -100,3 +106,4 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 - Flask consumira a API Java para renderizar telas e dashboards.
 - Python ficara responsavel por relatorios, graficos e indicadores.
 - O banco inicial sugerido e PostgreSQL.
+
