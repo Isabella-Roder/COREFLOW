@@ -1,0 +1,20 @@
+﻿# Java
+backend-spring/target/
+*.class
+*.log
+
+# Python
+frontend-flask/.venv/
+frontend-flask/__pycache__/
+*.pyc
+
+# IDE
+.vscode/
+.idea/
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Ambiente
+.env
