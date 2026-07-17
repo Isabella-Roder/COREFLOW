@@ -1,4 +1,4 @@
-﻿:root {
+:root {
     --bg: #eef3f8;
     --surface: #ffffff;
     --surface-soft: #f8fafc;
@@ -208,4 +208,145 @@ h1 {
 
 .alert-panel > h2 {
     color: #be123c;
+}
+.cards-resumo {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+    margin: 18px 0;
+}
+
+.card-resumo {
+    position: relative;
+    overflow: hidden;
+    min-height: 118px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fbff 100%);
+    box-shadow: var(--shadow);
+}
+
+.card-resumo::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 5px;
+    background: var(--primary);
+}
+
+.card-resumo span {
+    display: block;
+    margin-bottom: 12px;
+    color: var(--muted);
+    font-size: 0.86rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.card-resumo strong {
+    display: block;
+    max-width: 100%;
+    color: var(--text);
+    font-size: 1.65rem;
+    line-height: 1.15;
+    overflow-wrap: anywhere;
+}
+
+.card-resumo:nth-child(2)::before {
+    background: #f59e0b;
+}
+
+.card-resumo:nth-child(3)::before {
+    background: #16a34a;
+}
+
+.card-resumo:nth-child(4)::before {
+    background: #e11d48;
+}
+
+.painel {
+    margin-bottom: 16px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface);
+    box-shadow: var(--shadow);
+    overflow-x: auto;
+}
+
+.painel h2 {
+    margin-bottom: 14px;
+    font-size: 1.08rem;
+}
+
+table {
+    width: 100%;
+    min-width: 620px;
+    border-collapse: collapse;
+    font-size: 0.92rem;
+}
+
+thead {
+    background: var(--surface-soft);
+}
+
+th,
+td {
+    padding: 12px 14px;
+    border-bottom: 1px solid #edf2f7;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+    text-transform: uppercase;
+}
+
+td {
+    color: var(--text);
+}
+
+tbody tr:last-child td {
+    border-bottom: 0;
+}
+
+tbody tr:hover {
+    background: #f8fafc;
+}
+
+td:first-child {
+    color: var(--primary);
+    font-weight: 800;
+}
+
+td:last-child {
+    font-weight: 700;
+}
+
+@media (max-width: 900px) {
+    .cards-resumo {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 640px) {
+    .cards-resumo {
+        grid-template-columns: 1fr;
+    }
+
+    .card-resumo {
+        min-height: auto;
+    }
+
+    .card-resumo strong {
+        font-size: 1.45rem;
+    }
+
+    .painel {
+        padding: 14px;
+    }
 }

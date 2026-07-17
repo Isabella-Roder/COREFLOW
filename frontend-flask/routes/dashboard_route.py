@@ -13,6 +13,12 @@ def dashboard() :
     estoques = buscar_lista("/estoques")
     estoques_baixos = buscar_lista("/empresas/33/estoques/baixo")
     movimentacoes = buscar_lista("/movimentacoes-estoque")
+    vendas = buscar_lista("/vendas")
+    compras = buscar_lista("/compras")
+
+    total_vendido = sum(venda.get("valorTotal", 0) for venda in vendas)
+    total_comprado = sum(compra.get("valorTotal", 0) for compra in compras)
+    saldo = total_vendido - total_comprado
 
     return render_template (
         "dashboard.html",
@@ -22,5 +28,10 @@ def dashboard() :
         produtos_servicos = produtos_servicos,
         estoques = estoques,
         estoques_baixos = estoques_baixos,
-        movimentacoes = movimentacoes
+        movimentacoes = movimentacoes, 
+        vendas = vendas,
+        compras = compras,
+        total_vendido = total_vendido, 
+        total_comprado = total_comprado,
+        saldo = saldo
     )  

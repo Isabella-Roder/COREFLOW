@@ -1,4 +1,4 @@
-﻿# Roadmap - CoreFlow
+# Roadmap - CoreFlow
 
 ## Fase 1 - Fundacao
 
@@ -42,8 +42,9 @@
 - [x] Registro de vendas.
 - [x] Itens da venda e calculo de total.
 - [x] Atualizacao automatica do estoque por vendas.
-- [ ] Registro de compras.
-- [ ] Atualizacao automatica do estoque por compras.
+- [x] Registro de compras.
+- [x] Atualizacao automatica do estoque por compras.
+- [x] Movimentacao de entrada por compras.
 ## Fase 5 - Financeiro
 
 - Contas a pagar.
@@ -54,7 +55,7 @@
 ## Fase 6 - Flask e Dashboards
 
 - [x] Dashboard inicial com Flask.
-- [ ] Dashboard gerencial completo.
+- [x] Dashboard gerencial inicial com vendas, compras e saldo.
 - [x] Consumo da API Spring Boot.
 
 ## Fase 7 - Analytics

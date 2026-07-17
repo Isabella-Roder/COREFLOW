@@ -1,4 +1,4 @@
-﻿# Requisitos - CoreFlow
+# Requisitos - CoreFlow
 
 ## 1. Visao Geral
 
@@ -82,9 +82,10 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 - [ ] Gerar conta a receber.
 ### 3.8 Compras
 
-- [ ] Registrar compra.
-- [ ] Associar fornecedor.
-- [ ] Atualizar estoque automaticamente.
+- [x] Registrar compra.
+- [x] Associar fornecedor.
+- [x] Atualizar estoque automaticamente.
+- [x] Registrar movimentacao de entrada por compra.
 - [ ] Gerar conta a pagar.
 
 ### 3.9 Financeiro
@@ -98,9 +99,9 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 ### 3.10 Dashboards e Relatorios
 
 - [x] Dashboard inicial no Flask.
-- [ ] Faturamento do periodo.
+- [x] Resumo de vendas e compras no dashboard.
 - [ ] Despesas do periodo.
-- [ ] Lucro estimado.
+- [x] Saldo gerencial inicial no dashboard.
 - [ ] Contas vencidas.
 - [ ] Relatorios com Python.
 - [ ] Exportacao CSV/PDF.

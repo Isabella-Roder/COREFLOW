@@ -54,6 +54,86 @@
             </article>
         </section>
 
+        <section class="cards-resumo">
+            <div class="card-resumo">
+                <span>Total vendido</span>
+                <strong>R$ {{ "%.2f"|format(total_vendido) }}</strong>
+            </div>
+
+            <div class="card-resumo">
+                <span>Total comprado</span>
+                <strong>R$ {{ "%.2f"|format(total_comprado) }}</strong>
+            </div>
+
+            <div class="card-resumo">
+                <span>Saldo</span>
+                <strong>R$ {{ "%.2f"|format(saldo) }}</strong>
+            </div>
+
+            <div class="card-resumo">
+                <span>Estoque baixo</span>
+                <strong>{{ estoques_baixos|length }}</strong>
+            </div>
+        </section>
+
+        <section class="painel">
+            <h2>Últimas vendas</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for venda in vendas[-5:] %}
+                    <tr>
+                        <td>#{{ venda.id }}</td>
+                        <td>{{ venda.cliente.nome if venda.cliente else "Sem cliente" }}</td>
+                        <td>R$ {{ "%.2f"|format(venda.valorTotal or 0) }}</td>
+                        <td>{{ venda.status }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4">Nenhuma venda registrada.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
+        <section class="painel">
+            <h2>Últimas compras</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fornecedor</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for compra in compras[-5:] %}
+                    <tr>
+                        <td>#{{ compra.id }}</td>
+                        <td>{{ compra.fornecedor.nome if compra.fornecedor else "Sem fornecedor" }}</td>
+                        <td>R$ {{ "%.2f"|format(compra.valorTotal or 0) }}</td>
+                        <td>{{ compra.status }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="4">Nenhuma compra registrada.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+
         <section class="content-grid">
             <div class="panel">
                 <h2>Empresas cadastradas</h2>
