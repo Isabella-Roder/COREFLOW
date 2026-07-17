@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreFlow - Compras</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="dashboard">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">CoreFlow</p>
+                <h1>Compras</h1>
+                <p>Visao das compras registradas pela empresa.</p>
+            </div>
+
+            <a class="api-badge" href="/">Voltar ao dashboard</a>
+        </section>
+
+        <section class="cards-resumo">
+            <div class="card-resumo">
+                <span>Total de compras</span>
+                <strong>{{ total_compras }}</strong>
+            </div>
+
+            <div class="card-resumo">
+                <span>Valor comprado</span>
+                <strong>R$ {{ "%.2f"|format(valor_total) }}</strong>
+            </div>
+
+            <div class="card-resumo">
+                <span>Maior compra</span>
+                <strong>R$ {{ "%.2f"|format(maior_compra) }}</strong>
+            </div>
+
+            <div class="card-resumo">
+                <span>Fornecedores usados</span>
+                <strong>{{ total_fornecedores }}</strong>
+            </div>
+        </section>
+
+        <section class="painel">
+            <h2>Historico de compras</h2>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fornecedor</th>
+                        <th>Empresa</th>
+                        <th>Valor total</th>
+                        <th>Status</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for compra in compras %}
+                    <tr>
+                        <td>#{{ compra.id }}</td>
+
+                        <td>
+                            {% if compra.fornecedor %}
+                                {{ compra.fornecedor.nomeFantasia or compra.fornecedor.razaoSocial or "Fornecedor"}}
+                            {% else %}
+                                Sem fornecedor
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {% if compra.empresa %}
+                                {{ compra.empresa.nomeFantasia }}
+                            {% else %}
+                                Sem empresa
+                            {% endif %}
+                        </td>
+
+                        <td>R$ {{ "%.2f"|format(compra.valorTotal or 0) }}</td>
+                        <td>{{ compra.status }}</td>
+                        <td>{{ compra.dataHora }}</td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="6">Nenhuma compra registrada.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+</html>

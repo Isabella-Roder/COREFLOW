@@ -1,0 +1,187 @@
+{% extends "base.html" %}
+
+{% block title %}CoreFlow - Cadastros{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">CoreFlow</p>
+        <h1>Cadastros</h1>
+        <p>Crie registros operacionais para testar e alimentar o sistema.</p>
+    </div>
+
+    <span class="api-badge">Painel administrativo</span>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="content-grid">
+    <div class="panel">
+        <h2>Novo fornecedor</h2>
+
+        <form class="form-card" action="/cadastros/fornecedor" method="post">
+            <label>
+                Empresa
+                <select name="empresaId" required>
+                    <option value="">Selecione</option>
+                    {% for empresa in empresas %}
+                        <option value="{{ empresa.id }}">{{ empresa.nomeFantasia }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Nome
+                <input type="text" name="nome" required>
+            </label>
+
+            <label>
+                Documento
+                <input type="text" name="documento" required>
+            </label>
+
+            <label>
+                Email
+                <input type="email" name="email" required>
+            </label>
+
+            <label>
+                Telefone
+                <input type="text" name="telefone" required>
+            </label>
+
+            <label>
+                Tipo de serviço
+                <input type="text" name="tipoServico" required>
+            </label>
+
+            <button type="submit">Cadastrar fornecedor</button>
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2>Novo produto ou serviço</h2>
+
+        <form class="form-card" action="/cadastros/produto-servico" method="post">
+            <label>
+                Empresa
+                <select name="empresaId" required>
+                    <option value="">Selecione</option>
+                    {% for empresa in empresas %}
+                        <option value="{{ empresa.id }}">{{ empresa.nomeFantasia }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Nome
+                <input type="text" name="nome" required>
+            </label>
+
+            <label>
+                Descrição
+                <input type="text" name="descricao" required>
+            </label>
+
+            <label>
+                Preço de venda
+                <input type="number" name="precoVenda" step="0.01" min="0" required>
+            </label>
+
+            <label>
+                Custo
+                <input type="number" name="custo" step="0.01" min="0" required>
+            </label>
+
+            <label>
+                Tipo
+                <select name="tipo" required>
+                    <option value="">Selecione</option>
+                    <option value="PRODUTO">Produto</option>
+                    <option value="SERVICO">Serviço</option>
+                </select>
+            </label>
+
+            <button type="submit">Cadastrar item</button>
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2>Estoque inicial</h2>
+
+        <form class="form-card" action="/cadastros/estoque" method="post">
+            <label>
+                Empresa
+                <select name="empresaId" required>
+                    <option value="">Selecione</option>
+                    {% for empresa in empresas %}
+                        <option value="{{ empresa.id }}">{{ empresa.nomeFantasia }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Produto
+                <select name="produtoServicoId" required>
+                    <option value="">Selecione</option>
+                    {% for item in produtos_servicos %}
+                        {% if item.tipo == "PRODUTO" %}
+                            <option value="{{ item.id }}">{{ item.nome }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Quantidade atual
+                <input type="number" name="quantidadeAtual" min="0" required>
+            </label>
+
+            <label>
+                Estoque mínimo
+                <input type="number" name="estoqueMinimo" min="0" required>
+            </label>
+
+            <button type="submit">Criar estoque</button>
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2>Novo Cliente</h2>
+
+        <form method="post" action="/cadastros/cliente" class="form-card">
+            <label>
+                Empresa
+                <select name="empresaId" required>
+                    <option value="">Selecione</option>
+                    {% for empresa in empresas %}
+                        <option value="{{ empresa.id }}">{{ empresa.nomeFantasia }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Nome
+                <input type="text" name="nome" required>
+            </label>
+
+            <label>
+                Documento
+                <input type="text" name="documento" required>
+            </label>
+
+            <label>
+                Email
+                <input type="email" name="email" required>
+            </label>
+
+            <label>
+                Telefone
+                <input type="text" name="telefone" required>
+            </label>
+
+            <button type="submit">Cadastrar cliente</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

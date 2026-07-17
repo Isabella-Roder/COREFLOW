@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}CoreFlow{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="dashboard">
+        <nav class="top-nav">
+            <a href="/" class="brand-link">CoreFlow</a>
+
+            <div class="nav-links">
+                <a href="/">Dashboard</a>
+                <a href="/compras">Compras</a>
+            </div>
+        </nav>
+
+        {% block hero %}{% endblock %}
+
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
