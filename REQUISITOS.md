@@ -63,18 +63,23 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 
 ### 3.6 Estoque
 
-- [ ] Entrada de estoque.
-- [ ] Saida de estoque.
-- [ ] Ajuste manual de estoque.
-- [ ] Alerta de estoque baixo.
-
+- [x] Cadastro de estoque.
+- [x] Listar estoque por empresa.
+- [x] Entrada de estoque.
+- [x] Saida de estoque.
+- [x] Ajuste manual de estoque.
+- [x] Historico de movimentacoes por estoque.
+- [x] Historico de movimentacoes por empresa.
+- [x] Alerta de estoque baixo.
 ### 3.7 Vendas
 
-- [ ] Registrar venda.
-- [ ] Associar cliente.
-- [ ] Baixar estoque automaticamente.
+- [x] Registrar venda.
+- [x] Associar cliente.
+- [x] Registrar itens da venda.
+- [x] Calcular total da venda.
+- [x] Baixar estoque automaticamente.
+- [x] Registrar movimentacao de saida por venda.
 - [ ] Gerar conta a receber.
-
 ### 3.8 Compras
 
 - [ ] Registrar compra.
@@ -106,4 +111,5 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 - Flask consumira a API Java para renderizar telas e dashboards.
 - Python ficara responsavel por relatorios, graficos e indicadores.
 - O banco inicial sugerido e PostgreSQL.
+
 

@@ -37,6 +37,21 @@
                 <h2>Produtos e Servicos</h2>
                 <strong>{{ produtos_servicos|length }}</strong>
             </article>
+
+            <article class="metric-card">
+                <h2>Itens em estoque</h2>
+                <strong>{{ estoques|length }}</strong>
+            </article>
+
+            <article class="metric-card alert-card">
+                <h2>Estoque baixo</h2>
+                <strong>{{ estoques_baixos|length }}</strong>
+            </article>
+
+            <article class="metric-card">
+                <h2>Movimentações</h2>
+                <strong>{{ movimentacoes|length }}</strong>
+            </article>
         </section>
 
         <section class="content-grid">
@@ -97,6 +112,50 @@
                     </article>
                 {% else %}
                     <p class="empty">Nenhum produto ou servico cadastrado.</p>
+                {% endfor %}
+            </div>
+
+            <div class="panel">
+                <h2>Estoque</h2>
+
+                {% for estoque in estoques %}
+                    <article class="data-card">
+                        <h3>{{ estoque.produtoServico.nome }}</h3>
+                        <p>Quantidade atual: {{ estoque.quantidadeAtual }}</p>
+                        <p>Estoque minimo: {{ estoque.estoqueMinimo }}</p>
+                        <p>Status: {{ "Ativo" if estoque.ativo else "Inativo" }}</p>
+                    </article>
+                {% else %}
+                    <p class="empty">Nenhum item em estoque.</p>
+                {% endfor %}
+            </div>
+
+            <div class="panel alert-panel">
+                <h2>Alertas de estoque</h2>
+
+                {% for estoque in estoques_baixos %}
+                    <article class="data-card">
+                        <h3>{{ estoque.produtoServico.nome }}</h3>
+                        <p>Quantidade atual: {{ estoque.quantidadeAtual }}</p>
+                        <p>Estoque mínimo: {{ estoque.estoqueMinimo }}</p>
+                    </article>
+                {% else %}
+                    <p class="empty">Nenhum item com estoque baixo.</p>
+                {% endfor %}
+            </div>
+
+            <div class="panel">
+                <h2>Últimas movimentações</h2>
+
+                {% for mov in movimentacoes %}
+                    <article class="data-card">
+                        <h3>{{ mov.produtoServico.nome }}</h3>
+                        <p>Tipo: {{ mov.tipoMovimentacaoEstoque }}</p>
+                        <p>Quantidade: {{ mov.quantidade }}</p>
+                        <p>Data: {{ mov.dataHora }}</p>
+                    </article>
+                {% else %}
+                    <p class="empty">Nenhuma movimentação registrada.</p>
                 {% endfor %}
             </div>
         </section>

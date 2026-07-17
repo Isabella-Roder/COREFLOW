@@ -188,3 +188,24 @@ h1 {
         grid-template-columns: 1fr;
     }
 }
+
+.alert-card {
+    border-color: #fecaca;
+    background: #fff1f2;
+}
+
+.alert-card h2 {
+    color: #be123c;
+}
+
+.alert-card strong {
+    color: #9f1239;
+}
+
+.alert-panel {
+    border-color: #fecaca;
+}
+
+.alert-panel > h2 {
+    color: #be123c;
+}

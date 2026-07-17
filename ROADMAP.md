@@ -33,11 +33,17 @@
 
 ## Fase 4 - Estoque, Vendas e Compras
 
-- Entrada e saida de estoque.
-- Registro de vendas.
-- Registro de compras.
-- Atualizacao automatica do estoque.
-
+- [x] Cadastro de estoque.
+- [x] Entrada de estoque.
+- [x] Saida de estoque.
+- [x] Ajuste manual de estoque.
+- [x] Historico de movimentacoes de estoque.
+- [x] Alerta de estoque baixo.
+- [x] Registro de vendas.
+- [x] Itens da venda e calculo de total.
+- [x] Atualizacao automatica do estoque por vendas.
+- [ ] Registro de compras.
+- [ ] Atualizacao automatica do estoque por compras.
 ## Fase 5 - Financeiro
 
 - Contas a pagar.
@@ -57,4 +63,5 @@
 - Graficos.
 - Exportacao CSV/PDF.
 - Indicadores financeiros.
+
 
