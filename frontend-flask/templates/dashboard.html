@@ -1,0 +1,105 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreFlow - Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="dashboard">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">CoreFlow</p>
+                <h1>Dashboard empresarial</h1>
+                <p>Visao geral dos dados vindos da API Spring Boot.</p>
+            </div>
+            <span class="api-badge">Spring Boot conectado</span>
+        </section>
+
+        <section class="metrics-grid">
+            <article class="metric-card">
+                <h2>Empresas</h2>
+                <strong>{{ empresas|length }}</strong>
+            </article>
+
+            <article class="metric-card">
+                <h2>Clientes</h2>
+                <strong>{{ clientes|length }}</strong>
+            </article>
+
+            <article class="metric-card">
+                <h2>Fornecedores</h2>
+                <strong>{{ fornecedores|length }}</strong>
+            </article>
+
+            <article class="metric-card">
+                <h2>Produtos e Servicos</h2>
+                <strong>{{ produtos_servicos|length }}</strong>
+            </article>
+        </section>
+
+        <section class="content-grid">
+            <div class="panel">
+                <h2>Empresas cadastradas</h2>
+
+                {% for empresa in empresas %}
+                    <article class="data-card">
+                        <h3>{{ empresa.nomeFantasia }}</h3>
+                        <p>Razao social: {{ empresa.razaoSocial }}</p>
+                        <p>Email: {{ empresa.email }}</p>
+                        <p>CNPJ: {{ empresa.cnpj }}</p>
+                    </article>
+                {% else %}
+                    <p class="empty">Nenhuma empresa cadastrada.</p>
+                {% endfor %}
+            </div>
+
+            <div class="panel">
+                <h2>Clientes</h2>
+
+                {% for cliente in clientes %}
+                    <article class="data-card">
+                        <h3>{{ cliente.nome }}</h3>
+                        <p>Email: {{ cliente.email }}</p>
+                        <p>Telefone: {{ cliente.telefone }}</p>
+                        <p>Status: {{ "Ativo" if cliente.ativo else "Inativo" }}</p>
+                    </article>
+                {% else %}
+                    <p class="empty">Nenhum cliente cadastrado.</p>
+                {% endfor %}
+            </div>
+
+            <div class="panel">
+                <h2>Fornecedores</h2>
+
+                {% for fornecedor in fornecedores %}
+                    <article class="data-card">
+                        <h3>{{ fornecedor.nome }}</h3>
+                        <p>Servico: {{ fornecedor.tipoServico }}</p>
+                        <p>Email: {{ fornecedor.email }}</p>
+                        <p>Status: {{ "Ativo" if fornecedor.ativo else "Inativo" }}</p>
+                    </article>
+                {% else %}
+                    <p class="empty">Nenhum fornecedor cadastrado.</p>
+                {% endfor %}
+            </div>
+
+            <div class="panel">
+                <h2>Produtos e Servicos</h2>
+
+                {% for item in produtos_servicos %}
+                    <article class="data-card">
+                        <h3>{{ item.nome }}</h3>
+                        <p>Tipo: {{ item.tipo }}</p>
+                        <p>Preco: R$ {{ item.precoVenda }}</p>
+                        <p>Custo: R$ {{ item.custo }}</p>
+                    </article>
+                {% else %}
+                    <p class="empty">Nenhum produto ou servico cadastrado.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>

@@ -26,10 +26,10 @@
 
 ## Fase 3 - Cadastros Operacionais
 
-- Clientes.
-- Fornecedores.
-- Produtos.
-- Servicos.
+- [x] Clientes.
+- [x] Fornecedores.
+- [x] Produtos e servicos.
+- [x] Preco, custo e status de produtos/servicos.
 
 ## Fase 4 - Estoque, Vendas e Compras
 
@@ -47,9 +47,9 @@
 
 ## Fase 6 - Flask e Dashboards
 
-- Telas administrativas com Flask.
-- Dashboard gerencial.
-- Consumo da API Spring Boot.
+- [x] Dashboard inicial com Flask.
+- [ ] Dashboard gerencial completo.
+- [x] Consumo da API Spring Boot.
 
 ## Fase 7 - Analytics
 

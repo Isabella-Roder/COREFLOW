@@ -41,25 +41,25 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 
 ### 3.3 Clientes
 
-- [ ] Cadastrar cliente.
-- [ ] Listar clientes.
-- [ ] Editar cliente.
+- [x] Cadastrar cliente.
+- [x] Listar clientes.
+- [x] Editar cliente.
 - [ ] Consultar historico de vendas por cliente.
 
 ### 3.4 Fornecedores
 
-- [ ] Cadastrar fornecedor.
-- [ ] Listar fornecedores.
-- [ ] Editar fornecedor.
+- [x] Cadastrar fornecedor.
+- [x] Listar fornecedores.
+- [x] Editar fornecedor.
 - [ ] Consultar historico de compras por fornecedor.
 
 ### 3.5 Produtos e Servicos
 
-- [ ] Cadastrar produto.
-- [ ] Cadastrar servico.
-- [ ] Definir preco de venda.
-- [ ] Definir custo.
-- [ ] Controlar status ativo/inativo.
+- [x] Cadastrar produto.
+- [x] Cadastrar servico.
+- [x] Definir preco de venda.
+- [x] Definir custo.
+- [x] Controlar status ativo/inativo.
 
 ### 3.6 Estoque
 
@@ -92,7 +92,7 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 
 ### 3.10 Dashboards e Relatorios
 
-- [ ] Dashboard gerencial no Flask.
+- [x] Dashboard inicial no Flask.
 - [ ] Faturamento do periodo.
 - [ ] Despesas do periodo.
 - [ ] Lucro estimado.
