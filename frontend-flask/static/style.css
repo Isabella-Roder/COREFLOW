@@ -481,3 +481,28 @@ td:last-child {
 .linha-alerta td:first-child {
     color: #be123c;
 }
+
+.status-pill {
+    display: inline-flex;
+    align-items: center;
+    min-height: 28px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.status-entrada {
+    background: #dcfce7;
+    color: #166534;
+}
+
+.status-saida {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.status-ajuste {
+    background: #e0f2fe;
+    color: #075985;
+}

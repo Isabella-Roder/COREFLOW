@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}CoreFlow - Movimentações de Estoque{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">CoreFlow</p>
+        <h1>Movimentações de Estoque</h1>
+        <p>Acompanhe entradas, saídas e ajustes que alteraram o estoque.</p>
+    </div>
+
+    <span class="api-badge">Histórico operacional</span>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="cards-resumo">
+    <div class="card-resumo">
+        <span>Total de movimentações</span>
+        <strong>{{ total_movimentacoes }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Entradas</span>
+        <strong>{{ total_entradas }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Saídas</span>
+        <strong>{{ total_saidas }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Ajustes</span>
+        <strong>{{ total_ajustes }}</strong>
+    </div>
+</section>
+
+<section class="painel">
+    <h2>Histórico de movimentações</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Produtos</th>
+                <th>Empresa</th>
+                <th>Tipo</th>
+                <th>Quantidade</th>
+                <th>Data</th>
+                <th>Observação</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for mov in movimentacoes %}
+                <tr>
+                    <td>#{{ mov.id }}</td>
+
+                    <td>
+                        {% if mov.produtoServico %}
+                            {{ mov.produtoServico.nome }}
+                        {% else %}
+                            Produto não informado
+                        {% endif %}
+
+                        <td>
+                            {% if mov.empresa %}
+                                {{ mov.empresa.nomeFantasia }}
+                            {% else %}
+                                Sem empresa
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            <span class="status-pill status-{{ mov.tipoMovimentacaoEstoque|lower }}">
+                                {{ mov.tipoMovimentacaoEstoque }}
+                            </span>
+                        </td>
+                        <td>{{ mov.quantidade }}</td>
+                        <td>{{ mov.dataHora }}</td>
+                        <td>{{ mov.observacao or "Sem observação" }}</td>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Nenhuma movimentação registrada.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}
