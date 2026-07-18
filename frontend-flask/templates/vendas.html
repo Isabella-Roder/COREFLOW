@@ -1,0 +1,149 @@
+{% extends "base.html" %}
+
+{% block title %}CoreFlow - Vendas{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">CoreFlow</p>
+        <h1>Vendas</h1>
+        <p>Registre vendas e acompanhe o historico comercial.</p>
+    </div>
+
+    <span class="api-badge">Operação comercial</span>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="cards-resumo">
+    <div class="card-resumo">
+        <span>Total de vendas</span>
+        <strong>{{ total_vendas }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Valor vendido</span>
+        <strong>R$ {{ "%.2f"|format(valor_total) }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Maior venda</span>
+        <strong>R$ {{ "%.2f"|format(maior_venda) }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Clientes atendidos</span>
+        <strong>{{ total_clientes }}</strong>
+    </div>
+</section>
+
+<section class="content-grid">
+    <div class="panel">
+        <h2>Registrar venda</h2>
+
+        <form class="form-card" action="/vendas/registrar" method="post">
+            <label>
+                Empresa
+                <select name="empresaId" required>
+                    <option value="">Selecione</option>
+                    {% for empresa in empresas %}
+                        <option value="{{ empresa.id }}">{{ empresa.nomeFantasia }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Cliente
+                <select name="clienteId" required>
+                    <option value="">Selecione</option>
+                    {% for cliente in clientes %}
+                        <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Produto ou serviço
+                <select name="produtoServicoId" required>
+                    <option value="">Selecione</option>
+                    {% for item in produtos_servicos %}
+                        <option value="{{ item.id }}">{{ item.nome }} - {{ item.tipo }} - R$ {{ item.precoVenda }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+
+            <label>
+                Quantidade
+                <input type="number" name="quantidade" min="1" value="1" required>
+            </label>
+
+            <button type="submit">Registrar venda</button>
+        </form>
+    </div>
+
+    <div class="panel">
+        <h2>Resumo da operação</h2>
+
+        <article class="data-card">
+            <h3>Como funciona</h3>
+            <p>Ao registrar uma venda, o Spring Boot calcula o total automaticamente</p>
+            <p>Se o item for produto, p estoque será baixado.</p>
+            <p>Se for serviço, apenas entra no valor da venda.</p>
+        </article>
+
+        <article class="data-card">
+            <h3>Antes de vender</h3>
+            <p>Cadastre cliente, produto ou serviço e estoque inicial quando for produto.</p>
+        </article>
+    </div>
+</section>
+
+<section class="painel">
+    <h2>Historico de vendas</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Empresa</th>
+                <th>Valor total</th>
+                <th>Status</th>
+                <th>Data</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for venda in vendas %}
+                <tr>
+                    <td>#{{ venda.id }}</td>
+
+                    <td>
+                        {% if venda.cliente %}
+                            {{ venda.cliente.nome }}
+                        {% else %}
+                            Sem cliente
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if venda.empresa %}
+                            {{ venda.empresa.nomeFantasia }}
+                        {% else %}
+                            Sem empresa
+                        {% endif %}
+                    </td>
+
+                    <td>R$ {{ "%.2f"|format(venda.valorTotal or 0) }}</td>
+                    <td>{{ venda.status }}</td>
+                    <td>{{ venda.dataHora }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="6">Nenhuma venda registrada.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

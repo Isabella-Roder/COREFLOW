@@ -3,6 +3,12 @@ from services.api_service import buscar_lista, enviar_dados
 
 cadastro_bp = Blueprint("cadastros", __name__)
 
+def normalizar_valor(valor):
+    if not valor:
+        return 0
+
+    return float(valor.replace(".", "").replace(",", "."))
+
 @cadastro_bp.route("/cadastros")
 def cadastros() :
     empresas = buscar_lista("/empresas")
@@ -31,8 +37,8 @@ def cadastrar_produtoServico() :
     dados = {
         "nome": request.form.get("nome"),
         "descricao": request.form.get("descricao"),
-        "precoVenda": request.form.get("precoVenda"),
-        "custo": request.form.get("custo"),
+        "precoVenda": normalizar_valor(request.form.get("precoVenda")),
+        "custo": normalizar_valor(request.form.get("custo")),
         "tipo": request.form.get("tipo"),
         "ativo": True,
         "empresa": {
