@@ -506,3 +506,41 @@ td:last-child {
     background: #e0f2fe;
     color: #075985;
 }
+
+.empresa-card {
+    min-height: auto;
+}
+
+.empresa-indicadores {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 10px;
+    margin: 16px 0;
+}
+
+.empresa-indicadores div {
+    padding: 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--surface-soft);
+}
+
+.empresa-indicadores span {
+    display: block;
+    margin-bottom: 6px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.empresa-indicadores strong {
+    display: block;
+    font-size: 1.25rem;
+}
+
+@media (max-width: 900px) {
+    .empresa-indicadores {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}

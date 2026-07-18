@@ -66,6 +66,7 @@
 - [x] Tela de produtos e servicos.
 - [x] Tela de estoque.
 - [x] Tela de movimentacoes de estoque.
+- [x] Tela de empresas.
 
 ## Fase 7 - Analytics
 

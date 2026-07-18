@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}CoreFlow - Empresas{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">CoreFlow</p>
+        <h1>Empresas</h1>
+        <p>Visão administrativa das empresas e seus indicadores operacionais.</p>
+    </div>
+
+    <span class="api-badge">Administração geral</span>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="cards-resumo">
+    <div class="card-resumo">
+        <span>Total de empresas</span>
+        <strong>{{ total_empresas }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Com movimento</span>
+        <strong>{{ empresas_com_movimento }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Sem movimento</span>
+        <strong>{{ total_empresas - empresas_com_movimento }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Operação</span>
+        <strong>{{ "Ativa" if empresas_com_movimento > 0 else "Inicial" }}</strong>
+    </div>
+</section>
+
+<section class="content-grid">
+    {% for empresa in empresas %}
+        <article class="panel empresa-card">
+            <h2>{{ empresa.nomeFantasia }}</h2>
+
+            <div class="data-card">
+                <h3>Dados cadastrais</h3>
+                <p>Razão social: {{ empresa.razaoSocial }}</p>
+                <p>CNPJ: {{ empresa.cnpj }}</p>
+                <p>Email: {{ empresa.email }}</p>
+                <p>Telefone: {{ empresa.telefone }}</p>
+            </div>
+
+            <div class="empresa-indicadores">
+                <div>
+                    <span>Clientes</span>
+                    <Strong>{{ empresa.totalCliente }}</Strong>
+                </div>
+
+                <div>
+                    <span>Fornecedores</span>
+                    <strong>{{ empresa.totalFornecedores }}</strong>
+                </div>
+
+                <div>
+                    <span>Itens</span>
+                    <strong>{{ empresa.totalItens }}</strong>
+                </div>
+
+                <div>
+                    <span>Vendas</span>
+                    <strong>{{ empresa.totalVendas }}</strong>
+                </div>
+
+                <div>
+                    <span>Compras</span>
+                    <strong>{{ empresa.totalCompras }}</strong>
+                </div>
+            </div>
+
+            <div class="data-card">
+                <h3>Resumo financeiro inicial</h3>
+                <p>Total vendido: R$ {{ "%.2f"|format(empresa.totalVendido or 0) }}</p>
+                <p>Total comprado : R$ {{ "%.2f"|format(empresa.totalComprado or 0) }}</p>
+                <p>Saldo estimado: R$ {{ "%.2f"|format(empresa.saldo or 0) }}</p>
+            </div>
+        </article>
+    {% else %}
+        <section class="painel">
+            <p class="empty">Nenhuma empresa cadastrada.</p>
+        </section>
+    {% endfor %}
+</section>
+{% endblock %}

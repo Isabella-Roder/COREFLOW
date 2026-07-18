@@ -111,6 +111,7 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 - [x] Tela Flask de produtos e servicos.
 - [x] Tela Flask de estoque.
 - [x] Tela Flask de movimentacoes de estoque.
+- [x] Tela Flask de empresas.
 - [ ] Contas vencidas.
 - [ ] Relatorios com Python.
 - [ ] Exportacao CSV/PDF.
