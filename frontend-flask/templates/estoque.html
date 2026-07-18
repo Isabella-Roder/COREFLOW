@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+
+{% block title %}CoreFlow - Estoque{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">CoreFlow</p>
+        <h1>Estoque</h1>
+        <p>Acompanhe quantidade, limites minimos e alertas operecionais.</p>
+    </div>
+
+    <span class="api-badge">Controle operacional</span>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="cards-resumo">
+    <div class="card-resumo">
+        <span>Itens em estoque</span>
+        <strong>{{ total_itens }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Quantidade total</span>
+        <strong>{{ quantidade_total }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Itens ativos</span>
+        <strong>{{ itens_ativos }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Estoque baixo</span>
+        <strong>{{ total_estoque_baixo }}</strong>
+    </div>
+</section>
+
+<section class="painel">
+    <h2>Lista de estoque</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Produto</th>
+                <th>Empresa</th>
+                <th>Quantidade atual</th>
+                <th>Estoque mínimo</th>
+                <th>Situação</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for estoque in estoques %}
+                <tr class="{% if estoque.estaBaixo %}linha-alerta{% endif %}">
+                    <td>#{{ estoque.id }}</td>
+
+                    <td>
+                        {% if estoque.produtoServico %}
+                            {{ estoque.produtoServico.nome }}
+                        {% else %}
+                            Produto não informado
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if estoque.empresa %}
+                            {{ estoque.empresa.nomeFantasia }}
+                        {% else %}
+                            Sem empresa
+                        {% endif %}
+                    </td>
+
+                    <td>{{ estoque.quantidadeAtual }}</td>
+                    <td>{{ estoque.estoqueMinimo }}</td>
+
+                    <td>
+                        {% if estoque.estaBaixo %}
+                            Estoque baixo
+                        {% else %}
+                            Normal
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if estoque.ativo %}
+                            Ativo
+                        {% else %}
+                            Inativo
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="7">Nenhum estoque encontrado.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

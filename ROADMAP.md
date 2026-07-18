@@ -57,6 +57,14 @@
 - [x] Dashboard inicial com Flask.
 - [x] Dashboard gerencial inicial com vendas, compras e saldo.
 - [x] Consumo da API Spring Boot.
+- [x] Template base para paginas Flask.
+- [x] Tela de cadastros operacionais.
+- [x] Tela de vendas.
+- [x] Tela de compras.
+- [x] Tela de clientes.
+- [x] Tela de fornecedores.
+- [x] Tela de produtos e servicos.
+- [x] Tela de estoque.
 
 ## Fase 7 - Analytics
 

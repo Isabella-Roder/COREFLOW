@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}CoreFlow - Fornecedores{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">CoreFlow</p>
+        <h1>Fornecedores</h1>
+        <p>Acompanhe fornecedores cadastrados e historico de compras.</p>
+    </div>
+
+    <span class="api-badge">Rede de suprimentos</span>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="cards-resumo">
+    <div class="card-resumo">
+        <span>Total de fornecedores</span>
+        <strong>{{ total_fornecedores }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Fornecedores ativos</span>
+        <strong>{{ fornecedores_ativos }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Fornecedores inativos</span>
+        <strong>{{ fornecedores_inativos }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Com compras</span>
+        <strong>{{ fornecedores_com_compra }}</strong>
+    </div>
+</section>
+
+<section class="painel">
+    <h2>Lista de fornecedores</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Fornecedor</th>
+                <th>Documento</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Serviços</th>
+                <th>Empresa</th>
+                <th>Compras</th>
+                <th>Valor fornecido</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for fornecedor in fornecedores %}
+                <tr>
+                    <td>#{{ fornecedor.id }}</td>
+                    <td>{{ fornecedor.nome }}</td>
+                    <td>{{ fornecedor.documento }}</td>
+                    <td>{{ fornecedor.email }}</td>
+                    <td>{{ fornecedor.telefone }}</td>
+                    <td>{{ fornecedor.tipoServico }}</td>
+
+                    <td>
+                        {% if fornecedor.empresa %}
+                            {{ fornecedor.empresa.nomeFantasia }}
+                        {% else %}
+                            Sem empresa
+                        {% endif %}
+                    </td>
+
+                    <td>{{ fornecedor.totalCompras }}</td>
+                    <td>R$ {{ "%.2f"|format(fornecedor.valorFornecido or 0) }}</td>
+
+                    <td>
+                        {% if fornecedor.ativo %}
+                            Ativo
+                        {% else %}
+                            Inativo
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="10">Nenhum fornecedor cadastrado.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

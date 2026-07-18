@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+{% block title %}CoreFlow - Produtos e Serviços{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">CoreFlow</p>
+        <h1>Produtos e Serviços</h1>
+        <p>Analise catálago, custo, preços e margem estimada.</p>
+    </div>
+
+    <span class="api-badge">Catálogo operacional</span>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="cards-resumo">
+    <div class="card-resumo">
+        <span>Total de itens</span>
+        <strong>{{ total_itens }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Produtos</span>
+        <strong>{{ total_produtos }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Serviços</span>
+        <strong>{{ total_servicos }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Margem média</span>
+        <strong>{{ "%.1f"|format(margem_media) }}</strong>
+    </div>
+</section>
+
+<section class="painel">
+    <h2>Catálogo</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Item</th>
+                <th>Tipo</th>
+                <th>Preço venda</th>
+                <th>Custo</th>
+                <th>Margem</th>
+                <th>Margem %</th>
+                <th>Empresa</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for item in produtos_servicos %}
+                <tr>
+                    <td>#{{ item.id }}</td>
+                    <td>{{ item.nome }}</td>
+                    <td>{{ item.tipo }}</td>
+                    <td>R$ {{ "%.2f"|format(item.precoVenda or 0) }}</td>
+                    <td>R$ {{ "%.2f"|format(item.custo or 0) }}</td>
+                    <td>R$ {{ "%.2f"|format(item.margem or 0) }}</td>
+                    <td>{{ "%.1f"|format(item.percentualMargem or 0) }}%</td>
+
+                    <td>
+                        {% if item.empresa %}
+                            {{ item.empresa.nomeFantasia }}
+                        {% else %}
+                            Sem empresa
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% if item.ativo %}
+                            Ativo
+                        {% else %}
+                            Inativo
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">Nenhum produto ou serviço cadastrado.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

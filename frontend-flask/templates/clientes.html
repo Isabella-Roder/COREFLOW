@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+
+{% block title %}CoreFlow - Clientes{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">CoreFlow</p>
+        <h1>Clientes</h1>
+        <p>Acompanhe clientes cadastrados e historico comercial.</p>
+    </div>
+
+    <span class="api-badge">Relacionamento comercial</span>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="cards-resumo">
+    <div class="card-resumo">
+        <span>Total de clientes</span>
+        <strong>{{ total_clientes }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Clientes ativos</span>
+        <strong>{{ clientes_ativos }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Clientes inativos</span>
+        <strong>{{ clientes_inativos }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Com vendas</span>
+        <strong>{{ clientes_com_venda }}</strong>
+    </div>
+</section>
+
+<section class="painel">
+    <h2>Lista de clientes</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Cliente</th>
+                <th>Documento</th>
+                <th>Email</th>
+                <th>Telefone</th>
+                <th>Empresa</th>
+                <th>Vendas</th>
+                <th>Valor comprado</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for cliente in clientes %}
+                <tr>
+                    <td>#{{ cliente.id }}</td>
+                    <td>{{ cliente.nome }}</td>
+                    <td>{{ cliente.documento }}</td>
+                    <td>{{ cliente.email }}</td>
+                    <td>{{ cliente.telefone }}</td>
+
+                    <td>
+                        {% if cliente.empresa %}
+                            {{ cliente.empresa.nomeFantasia }}
+                        {% else %}
+                            Sem empresa
+                        {% endif %}
+                    </td>
+
+                    <td>{{ cliente.totalVendas }}</td>
+                    <td>R$ {{ "%.2f"|format(cliente.valorComprado or 0) }}</td>
+
+                    <td>
+                        {% if cliente.ativo %}
+                            Ativo
+                        {% else %}
+                            Inativo
+                        {% endif %}
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="9">Nenhum cliente cadastrado.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

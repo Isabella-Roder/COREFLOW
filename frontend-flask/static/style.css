@@ -472,3 +472,12 @@ td:last-child {
         justify-self: stretch;
     }
 }
+
+.linha-alerta td {
+    background: #fff1f2;
+    color: #9f1239;
+}
+
+.linha-alerta td:first-child {
+    color: #be123c;
+}
