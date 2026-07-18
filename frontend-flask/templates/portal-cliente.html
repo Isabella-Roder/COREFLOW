@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+
+{% block title %}Portal do Cliente{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div>
+        <span>Portal do Cliente</span>
+        <h1>Área do cliente</h1>
+        <p>Acompanhe suas compras, faturas e informações cadastradas.</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="form-card">
+    <h2>Acessar cliente</h2>
+
+    <form method="GET" action="{{ url_for('portal_cliente.portal_cliente') }}">
+        <div class="form-grid">
+            <label>
+                Cliente
+                <select name="clienteId" required>
+                    <option value="">Selecione</option>
+                    {% for item in clientes %}
+                        <option value="{{ item.id }}" {% if cliente_id and cliente_id == item.id %} selected {% endif %}>{{ item.nome }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+
+        <button type="submit">Entrar no portal</button>
+    </form>
+</section>
+
+{% if cliente %}
+    <section class="cards-resumo">
+        <article class="card-resumo">
+            <span>Total comprado</span>
+            <strong>R$ {{ "%.2f"|format(total_comprado) }}</strong>
+        </article>
+
+        <article class="card-resumo">
+            <span>Faturas em aberto</span>
+            <strong>R$ {{ "%.2f"|format(total_em_aberto) }}</strong>
+        </article>
+
+        <article class="card-resumo">
+            <span>Compras realizadas</span>
+            <strong>{{ vendas|length }}</strong>
+        </article>
+
+        <article class="card-resumo">
+            <span>Faturas</span>
+            <strong>{{ faturas|length }}</strong>
+        </article>
+    </section>
+
+    <section class="content-grid">
+        <article class="panel">
+            <h2>Meus dados</h2>
+
+            <div class="data-card">
+                <strong>{{ cliente.nome }}</strong>
+                <span>{{ cliente.email or "E-mail não informado" }}</span>
+                <span>{{ cliente.telefone or "Telefone não informado" }}</span>
+                <span>{{ cliente.documento or "Documento não informado" }}</span>
+            </div>
+        </article>
+
+        <article class="panel">
+            <h2>Resumo financeiro</h2>
+
+            <div class="data-card">
+                <span>Total comprado</span>
+                <strong>R$ {{ "%.2f"|format(total_comprado) }}</strong>
+
+                <span>Em aberto</span>
+                <strong>R$ {{ "%.2f"|format(total_em_aberto) }}</strong>
+            </div>
+        </article>
+    </section>
+
+    <section class="painel">
+        <h2>Minhas compras</h2>
+
+        {% if vendas %}
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for venda in vendas %}
+                            <tr>
+                                <td>#{{ venda.id }}</td>
+                                <td>{{ venda.dataVenda or "-" }}</td>
+                                <td>
+                                    <spam class="status-pill">
+                                        {{ venda.status or "Registrada" }}
+                                    </spam>
+                                </td>
+                                <td>
+                                    R$ {{ "%.2f"|format(venda.get("total", venda.get("valorTotal", 0)) or 0) }}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="empty">Nenhuma compra encontrada para este cliente.</p>
+        {% endif %}
+    </section>
+    
+    <section class="painel">
+        <h2>Minhas faturas</h2>
+
+        {% if faturas %}
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Status</th>
+                            <th>Valor</th>
+                            <th>Vencimento</th>
+                            <th>Pagamento</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for fatura in faturas %}
+                            <tr>
+                                <td>{{ fatura.descricao }}</td>
+                                <td>
+                                    <span class="status-pill">
+                                        {{ fatura.status }}
+                                    </span>
+                                </td>
+                                <td>R$ {{ "%.2f"|format(fatura.valor) }}</td>
+                                <td>{{ fatura.dataVencimento }}</td>
+                                <td>{{ fatura.dataPagamento or "-" }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="empty">Nenhuma fatura encontrada para este cliente.</p>
+        {% endif %}
+    </section>
+
+{% else %}
+    <section class="painel">
+        <p class="empty">Selecione um cliente para visualizar o portal.</p>
+    </section>
+{% endif %}
+{% endblock %}
