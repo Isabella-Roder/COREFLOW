@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block title %}Financeiro{% endblock %}
+
+{% block hero %} 
+<section class="hero">
+    <div>
+        <span>Financeiro</span>
+        <h1>Contas a pagar e receber</h1>
+        <p>Acompanhe pendências, baixas e saldo previsto da empresa.</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="form-card">
+    <h2>Selecionar empresa</h2>
+
+    <form method="GET" action="{{ url_for('financeiro.financeiro') }}">
+        <div class="form-grid">
+            <label>
+                Empresa
+                <select name="empresaId" required>
+                    <option value="">Selecione</option>
+                    {% for empresa in empresas %}
+                        <option value="{{ empresa.id }}" {% if empresaId and empresaId|int == empresa.id %} selected {% endif %}>{{ empresa.nomeFantasia }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+
+        <button type="submit">Buscar contas</button>
+    </form>
+</section>
+
+<section class="cards-resumo">
+    <article class="card-resumo">
+        <span>A receber</span>
+        <strong>R$ {{ "%.2f"|format(total_receber) }}</strong>
+    </article>
+
+    <article class="card-resumo">
+        <span>A pagar</span>
+        <strong>R$ {{ "%.2f"|format(total_pagar) }}</strong>
+    </article>
+
+    <article class="card-resumo">
+        <span>Vencidas</span>
+        <strong>R$ {{ "%.2f"|format(total_vencidas) }}</strong>
+    </article>
+
+    <article class="card-resumo">
+        <span>Saldo previsto</span>
+        <strong>R$ {{ "%.2f"|format(saldo_previsto) }}</strong>
+    </article>
+</section>
+
+<section class="form-card">
+    <h2>Nova conta financeira</h2>
+
+    {% if empresa_id%}
+        <form method="POST" action="{{ url_for('financeiro.criar_conta_financeira') }}">
+            <input type="hidden" name="empresaId" value="{{ empresa_id }}">
+
+            <div class="form-grid">
+                <label>
+                    Descrição
+                    <input type="text" name="descricao" required>
+                </label>
+
+                <label>
+                    Valor
+                    <input type="text" name="valor" class="money-input" required>
+                </label>
+
+                <label>
+                    Vencimento
+                    <input type="date" name="dataVencimento" required>
+                </label>
+
+                <label>
+                    Tipo
+                    <select name="tipo" required>
+                        <option value="RECEBER">Conta a receber</option>
+                        <option value="PAGAR">Conta a pagar</option>
+                    </select>
+                </label>
+
+                <label>
+                    Cliente
+                    <select name="clienteId">
+                        <option value="">Selecione se for receber</option>
+                        {% for cliente in clientes %}
+                            <option value="{{ cliente.id }}">{{ cliente.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+
+                <label>
+                    Fornecedor
+                    <select name="fornecedorId">
+                        <option value="">Selecione se for pagar</option>
+                        {% for fornecedor in fornecedores %}
+                            <option value="{{ fornecedor.id }}">{{ fornecedor.nome }}</option>
+                        {% endfor %}
+                    </select>
+                </label>
+            </div>
+
+            <button type="submit">Cadastrar conta</button>
+        </form>
+    {% else %}
+        <p class="empty">Selecione uma empresa para cadastrar contas financeiras.</p>
+    {% endif %}
+</section>
+
+<section class="painel">
+    <h2>Contas financeiras</h2>
+
+    {% if contas %}
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Descrição</th>
+                        <th>Tipo</th>
+                        <th>Status</th>
+                        <th>Valor</th>
+                        <th>Vencimento</th>
+                        <th>Pagamento</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for conta in contas %}
+                        <tr>
+                            <td>{{ conta.descricao }}</td>
+                            <td>{{ conta.tipo }}</td>
+                            <td>
+                                <span class="status-pill">
+                                    {{ conta.status }}
+                                </span>
+                            </td>
+                            <td>R$ {{ "%.2f"|format(conta.valor) }}</td>
+                            <td>{{ conta.dataVencimento }}</td>
+                            <td>{{ conta.dataPagamento or "-" }}</td>
+                            <td>
+                                {% if conta.status == "PENDENTE" %}
+                                    <form method="POST" action="{{ url_for('financeiro.pagar_conta', conta_id=conta.id) }}" class="inline-form">
+                                        <input type="hidden" name="empresaId" value="{{ empresa_id }}">
+                                        <button type="submit">Pagar</button>
+                                    </form>
+
+                                    <form action="{{ url_for('financeiro.cancelar_conta', conta_id=conta.id) }}" method="POST" class="inline-form">
+                                        <input type="hidden" name="empresaId" value="{{ empresaId }}">
+                                        <button type="submit">Cancelar</button> 
+                                    </form>
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p class="empty">Nenhuma conta financeira encontrada para essa empresa.</p>
+    {% endif %}
+</section>
+{% endblock %}

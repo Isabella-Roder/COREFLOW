@@ -47,10 +47,10 @@
 - [x] Movimentacao de entrada por compras.
 ## Fase 5 - Financeiro
 
-- Contas a pagar.
-- Contas a receber.
+- [x] Contas a pagar.
+- [x] Contas a receber.
 - Fluxo de caixa.
-- Baixa de pagamentos e recebimentos.
+- [x] Baixa de pagamentos e recebimentos.
 
 ## Fase 6 - Flask e Dashboards
 
@@ -68,6 +68,7 @@
 - [x] Tela de movimentacoes de estoque.
 - [x] Tela de empresas.
 - [x] Tela de relatorio executivo.
+- [x] Tela Flask de financeiro.
 
 ## Fase 7 - Analytics
 
@@ -80,4 +81,13 @@
 - Exportacao CSV/PDF.
 - Indicadores financeiros.
 
+
+
+## Fase 8 - Portal do Cliente
+
+- [ ] Estrutura inicial do portal do cliente.
+- [ ] Tela inicial do cliente.
+- [ ] Consulta de compras do cliente.
+- [ ] Consulta de faturas/contas em aberto.
+- [ ] Login do cliente.
 

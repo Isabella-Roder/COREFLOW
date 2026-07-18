@@ -79,21 +79,21 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 - [x] Calcular total da venda.
 - [x] Baixar estoque automaticamente.
 - [x] Registrar movimentacao de saida por venda.
-- [ ] Gerar conta a receber.
+- [ ] Gerar conta a receber automaticamente pela venda.
 ### 3.8 Compras
 
 - [x] Registrar compra.
 - [x] Associar fornecedor.
 - [x] Atualizar estoque automaticamente.
 - [x] Registrar movimentacao de entrada por compra.
-- [ ] Gerar conta a pagar.
+- [ ] Gerar conta a pagar automaticamente pela compra.
 
 ### 3.9 Financeiro
 
-- [ ] Contas a pagar.
-- [ ] Contas a receber.
-- [ ] Pagamento de conta.
-- [ ] Recebimento de conta.
+- [x] Contas a pagar.
+- [x] Contas a receber.
+- [x] Pagamento de conta.
+- [x] Recebimento de conta.
 - [ ] Fluxo de caixa.
 
 ### 3.10 Dashboards e Relatorios
@@ -113,6 +113,7 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 - [x] Tela Flask de movimentacoes de estoque.
 - [x] Tela Flask de empresas.
 - [x] Tela Flask de relatorio executivo.
+- [x] Tela Flask de financeiro.
 - [ ] Contas vencidas.
 - [x] Relatorio executivo inicial com Flask/Python.
 - [x] Graficos no relatorio executivo.
@@ -122,11 +123,21 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 - [x] Grafico de estoque por produto.
 - [ ] Exportacao CSV/PDF.
 
+### 3.11 Portal do Cliente
+
+- [ ] Area separada para clientes acessarem informacoes proprias.
+- [ ] Visualizar dados do cliente.
+- [ ] Visualizar compras realizadas.
+- [ ] Visualizar contas a receber/faturas em aberto.
+- [ ] Visualizar historico de pagamentos.
+- [ ] Login de cliente.
+
 ## 4. Arquitetura
 
 - Spring Boot sera a API principal.
 - Flask consumira a API Java para renderizar telas e dashboards.
 - Python ficara responsavel por relatorios, graficos e indicadores.
 - O banco inicial sugerido e PostgreSQL.
+
 
 
