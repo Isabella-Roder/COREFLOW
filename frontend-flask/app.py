@@ -9,6 +9,7 @@ from routes.produtos_servicos_route import produtos_servicos_bp
 from routes.estoque_route import estoques_bp
 from routes.movimentacoes_estoque_route import movimentacoes_estoque_bp
 from routes.empresa_route import empresas_bp
+from routes.relatorio_executivo_route import relatorio_executivo_bp
 
 app = Flask(__name__)
 
@@ -22,6 +23,7 @@ app.register_blueprint(produtos_servicos_bp)
 app.register_blueprint(estoques_bp)
 app.register_blueprint(movimentacoes_estoque_bp)
 app.register_blueprint(empresas_bp)
+app.register_blueprint(relatorio_executivo_bp)
 
 
 if __name__ == "__main__" :

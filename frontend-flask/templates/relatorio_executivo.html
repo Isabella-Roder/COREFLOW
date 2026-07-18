@@ -1,0 +1,242 @@
+{% extends "base.html" %}
+
+{% block title %}CoreFlow - Relatório Executivo{% endblock %}
+
+{% block hero %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">CoreFlow</p>
+        <h1>Relatório Executivo</h1>
+        <p>Visão consolidada de operação, vendas, compras, estoque e margem.</p>
+    </div>
+
+    <span class="api-badge">Visão estratégica</span>
+</section>
+{% endblock %}
+
+{% block content %}
+<section class="cards-resumo">
+    <div class="card-resumo">
+        <span>Total vendido</span>
+        <strong>R$ {{ "%.2f"|format(total_vendido) }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Total comprado</span>
+        <strong>R$ {{ "%.2f"|format(total_comprado) }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Saldo estimado</span>
+        <strong>R$ {{ "%.2f"|format(saldo_estimado) }}</strong>
+    </div>
+
+    <div class="card-resumo">
+        <span>Estoque baixo</span>
+        <strong>{{ estoques_baixos|length }}</strong>
+    </div>
+</section>
+
+<section class="content-grid">
+    <div class="panel">
+        <h2>Operação</h2>
+
+        <article class="data-card">
+            <h3>Cadastros</h3>
+            <p>Empresas: {{ empresas|length }}</p>
+            <p>Clientes: {{ clientes|length }}</p>
+            <p>Fornecedores: {{ fornecedores|length }}</p>
+        </article>
+
+        <article class="data-card">
+            <h3>Catálogo</h3>
+            <p>Produtos: {{ total_produtos }}</p>
+            <p>Serviços: {{ total_servicos }}</p>
+            <p>Total de itens: {{ produtos_servicos|length }}</p>
+        </article>
+    </div>
+
+    <div class="panel">
+        <h2>Comercial</h2>
+
+        <article class="data-card">
+            <h3>Vendas e compras</h3>
+            <p>Vendas registradas: {{ vendas|length }}</p>
+            <p>Compras registradas: {{ compras|length }}</p>
+            <p>Margem total estimanda do catálogo: R$ {{ "%.2f"|format(margem_total_estimada) }}</p>
+        </article>
+
+        <article class="data-card">
+            <h3>Movimentações</h3>
+            <p>Entradas de estoque: {{ total_entradas }}</p>
+            <p>Saídas de estoque: {{ total_saidas }}</p>
+            <p>Total de movimentações: {{ total_entradas + total_saidas }}</p>
+        </article>
+    </div>
+
+    <div class="panel alert-panel">
+        <h2>Alertas de estoque</h2>
+
+        {% for estoque in estoques_baixos %}
+            <article class="data-card">
+                <h3>
+                    {% if estoque.produtoServico %}
+                        {{ estoque.produtoServico.nome }}
+                    {% else %}
+                        Produto não informado
+                    {% endif %}
+                </h3>
+                <p>Quantidade atual: {{ estoque.quantidadeAtual }}</p>
+                <p>Estoque mínimo: {{ estoque.estoqueMinimo }}</p>
+            </article>
+        {% else %}
+            <p class="empty">Nenhum item com estoque baixo.</p>
+        {% endfor %}
+    </div>
+
+    <div class="panel">
+        <h2>Leitura rápida</h2>
+
+        <article class="data-card">
+            <h3>Situação geral</h3>
+
+            {% if saldo_estimado >= 0 %}
+                <p>O saldo estimado está positivo.</p>
+            {% else %}
+                <p>O saldo estimado está negativo.</p>
+            {% endif %}
+
+            {% if estoques_baixos|length > 0 %}
+                <p>Existem itens que precisam de atenção no estoque.</p>
+            {% else %}
+                <p>O estoque não possui alertas críticos no momento.</p>
+            {% endif %}
+        </article>
+    </div>
+</section>
+
+<section class="content-grid">
+    <div class="panel chart-panel">
+        <h2>Vendas X Compras</h2>
+        <div class="chart-box">
+            <canvas id="graficoVendasCompras"></canvas>
+        </div>
+    </div>
+
+    <div class="panel chart-panel">
+        <h2>Catálogo</h2>
+        <div class="chart-box">
+            <canvas id="graficoCatalogo"></canvas>
+        </div>
+    </div>
+
+    <div class="panel chart-panel">
+        <h2>Movimentações</h2>
+        <div class="chart-box">
+            <canvas id="graficoMovimentacoes"></canvas>
+        </div>
+    </div>
+
+    <div class="panel chart-panel">
+        <h2>Estoque por produtos</h2>
+        <div class="chart-box">
+            <canvas id="graficoEstoque"></canvas>
+        </div>
+    </div>
+</section>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    const graficoVendasCompras = {{ grafico_vendas_compras|tojson }};
+    const graficoCatalogo = {{ grafico_catalogo|tojson }};
+    const graficoMovimentacoes = {{ grafico_movimentacoes|tojson }};
+    const graficoEstoque = {{ grafico_estoque|tojson }};
+
+    new Chart(document.getElementById("graficoVendasCompras"), {
+        type: "bar",
+        data: {
+            labels: graficoVendasCompras.labels,
+            datasets: [
+                {
+                    label: "Valor",
+                    data: graficoVendasCompras.valores,
+                    backgroundColor: ["#2563eb", "#f59e0b"]
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById("graficoCatalogo"), {
+        type: "doughnut",
+        data: {
+            labels: graficoCatalogo.labels,
+            datasets: [
+                {
+                    data: graficoCatalogo.valores,
+                    backgroundColor: ["#16a34a", "#7c3aed"]
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false
+        }
+    });
+
+    new Chart(document.getElementById("graficoMovimentacoes"), {
+        type: "bar",
+        data: {
+            labels: graficoMovimentacoes.labels,
+            datasets: [
+                {
+                    label: "Movimentações",
+                    data: graficoMovimentacoes.valores,
+                    backgroundColor: ["#22c55e", "#ef4444"]
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    });
+
+    new Chart(document.getElementById("graficoEstoque"), {
+        type: "bar",
+        data: {
+            labels: graficoEstoque.labels,
+            datasets: [
+                {
+                    label: "Quantidade em estoque",
+                    data: graficoEstoque.valores,
+                    backgroundColor: "#0ea5e9"
+                }
+            ]
+        }, 
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: false
+                }
+            }
+        }
+    })
+</script>
+{% endblock %}

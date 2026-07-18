@@ -100,7 +100,7 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 
 - [x] Dashboard inicial no Flask.
 - [x] Resumo de vendas e compras no dashboard.
-- [ ] Despesas do periodo.
+- [x] Resumo de compras do periodo.
 - [x] Saldo gerencial inicial no dashboard.
 - [x] Template base Flask para telas internas.
 - [x] Tela Flask de cadastros operacionais.
@@ -112,8 +112,14 @@ CoreFlow sera um sistema de gestao empresarial para pequenas e medias empresas, 
 - [x] Tela Flask de estoque.
 - [x] Tela Flask de movimentacoes de estoque.
 - [x] Tela Flask de empresas.
+- [x] Tela Flask de relatorio executivo.
 - [ ] Contas vencidas.
-- [ ] Relatorios com Python.
+- [x] Relatorio executivo inicial com Flask/Python.
+- [x] Graficos no relatorio executivo.
+- [x] Grafico de vendas x compras.
+- [x] Grafico de catalogo.
+- [x] Grafico de movimentacoes de estoque.
+- [x] Grafico de estoque por produto.
 - [ ] Exportacao CSV/PDF.
 
 ## 4. Arquitetura

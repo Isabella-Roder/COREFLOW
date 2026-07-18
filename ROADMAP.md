@@ -67,11 +67,16 @@
 - [x] Tela de estoque.
 - [x] Tela de movimentacoes de estoque.
 - [x] Tela de empresas.
+- [x] Tela de relatorio executivo.
 
 ## Fase 7 - Analytics
 
-- Relatorios com Python.
-- Graficos.
+- [x] Relatorio executivo inicial com Flask/Python.
+- [x] Graficos no relatorio executivo.
+- [x] Grafico de vendas x compras.
+- [x] Grafico de catalogo.
+- [x] Grafico de movimentacoes de estoque.
+- [x] Grafico de estoque por produto.
 - Exportacao CSV/PDF.
 - Indicadores financeiros.
 
