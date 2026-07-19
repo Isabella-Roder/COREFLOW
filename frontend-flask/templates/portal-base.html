@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Portal do Cliente{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="portal-page">
+    <main class="dashboard portal-shell">
+        <nav class="top-nav portal-nav">
+            <a href="{{ url_for('portal_cliente.portal_cliente', clienteId=cliente_id) if cliente_id else url_for('portal_cliente.portal_cliente') }}" class="brand-link">
+                CoreFlow Cliente
+            </a>
+
+            <div class="nav-links">
+                <a href="{{ url_for('portal_cliente.portal_cliente', clienteId=cliente_id) if cliente_id else url_for('portal_cliente.portal_cliente') }}">Portal</a>
+                <a href="{{ url_for('portal_cliente.portal_cliente', clienteId=cliente_id) if cliente_id else url_for('portal_cliente.portal_cliente') }}#compras">Compras</a>
+                <a href="{{ url_for('portal_cliente.portal_cliente', clienteId=cliente_id) if cliente_id else url_for('portal_cliente.portal_cliente') }}#faturas">Faturas</a>
+                <a href="/">Área admin</a>
+            </div>
+        </nav>
+
+        {% block hero %}{% endblock %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='forms.js') }}"></script>
+</body>
+</html>

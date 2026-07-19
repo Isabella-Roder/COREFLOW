@@ -1,0 +1,96 @@
+﻿{% extends "portal-base.html" %}
+
+{% block title %}Detalhe da compra{% endblock %}
+
+{% block hero %}
+<section class="hero portal-hero">
+    <div>
+        <span class="portal-eyebrow">Portal do cliente</span>
+        <h1>Compra #{{ venda.id }}</h1>
+        <p>Detalhes da compra, itens adquiridos e valor total</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="portal-cliente">
+    <section class="portal-panel">
+        <div class="portal-panel-header">
+            <div>
+                <span class="portal-section-label">Resumo da compra</span>
+                <h2>InformaÃ§Ãµes principais</h2>
+            </div>
+
+            <a href="{{ url_for('portal_cliente.portal_cliente', clienteId=cliente_id) }}" class="portal-link-button">Voltar</a>
+        </div>
+
+        <section class="portal-summary">
+            <article>
+                <span>NÃºmero</span>
+                <strong>#{{ venda.id }}</strong>
+            </article>
+
+            <article>
+                <span>Status</span>
+                <strong>{{ venda.status or "Registrada" }}</strong>
+            </article>
+
+            <article>
+                <span>Data</span>
+                <strong>{{ venda.dataVenda or "-" }}</strong>
+            </article>
+
+            <article>
+                <span>Total</span>
+                <strong>R$ {{ "%.2f"|format(venda.get("total", venda.get("valorTotal", 0)) or 0) }}</strong>
+            </article>
+        </section>
+    </section>
+
+    <section class="portal-panel">
+        <div class="portal-panel-header">
+            <div>
+                <span class="portal-section-label">Itens</span>
+                <h2>Produtos e serviÃ§os</h2>
+            </div>
+        </div>
+
+        {% set itens = venda.get("itens", venda.get("itensVenda", [])) %}
+
+        {% if itens %}
+            <div class="portal-table-wrap">
+                <table class="portal-table">
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantidade</th>
+                            <th>Valor unitÃ¡rio</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        {% for item in itens %}
+                            {% set produto = item.get("produtoServico", item.get("produto", {})) %}
+                            {% set quantidade = item.get("quantidade", 0) or 0 %}
+                            {% set valor_unitario = item.get("valorUnitario", item.get("precoUnitario", 0)) or 0 %}
+                            {% set total_item = item.get("total", item.get("subtotal", quantidade * valor_unitario)) or 0 %}
+
+                            <tr>
+                                <td>
+                                    {{ produto.get("nome", "Item nÃ£o informado") }}
+                                </td>
+                                <td>{{ quantidade }}</td>
+                                <td>R$ {{ "%.2f"|format(valor_unitario) }}</td>
+                                <td>R$ {{ "%.2f"|format(total_item) }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p class="portal-empty">Nenhum item encontrado para estÃ¡ compra.</p>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "portal-base.html" %}
+
+{% block title %}Entrar no Portal{% endblock %}
+
+{% block hero %}
+<section class="hero portal-hero">
+    <div>
+        <span class="portal-eyebrow">Portal do Cliente</span>
+        <h1>Acesse sua área</h1>
+        <p>Informe seu e-mail cadastrado para consultar compras e faturas.</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="portal-cliente">
+    <section class="portal-access portal-login-card">
+        <div>
+            <span class="portal-section-label">Entrada</span>
+            <h2>Entrar no portal</h2>
+        </div>
+
+        <form method="POST" action="{{ url_for('portal_cliente.entrar_portal_cliente') }}">
+            <label>
+                E-mail
+                <input type="email" name="email" placeholder="cliente@email.com" required>
+            </label>
+
+            <button type="submit">Acessar</button>
+        </form>
+    </section>
+
+    {% if erro %}
+        <section class="portal-panel">
+            <p class="portal-empty">{{ erro }}</p>
+        </section>
+    {% endif %}
+</div>
+{% endblock %}

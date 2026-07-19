@@ -1,0 +1,83 @@
+﻿{% extends "portal-base.html" %}
+
+{% block title %}Detalhe da Fatura{% endblock %}
+
+{% block hero %}
+<section class="hero portal-hero">
+    <div>
+        <span class="portal-eyebrow">Portal do Cliente</span>
+        <h1>Fatura #{{ fatura.id }}</h1>
+        <p>Consulte os detalhes da cobranÃ§a, vencimento e situaÃ§Ã£o do pagamento.</p>
+    </div>
+</section>
+{% endblock %}
+
+{% block content %}
+<div class="portal-cliente">
+    <section class="portal-panel">
+        <div class="portal-panel-header">
+            <div>
+                <span class="portal-section-label">Resumo da fatura</span>
+                <h2>Informações principais</h2>
+            </div>
+
+            <a class="portal-link-button"
+               href="{{ url_for('portal_cliente.portal_cliente', clienteId=cliente_id) }}">
+                Voltar
+            </a>
+        </div>
+
+        <section class="portal-summary">
+            <article>
+                <span>Número</span>
+                <strong>#{{ fatura.id }}</strong>
+            </article>
+
+            <article>
+                <span>Status</span>
+                <strong>{{ fatura.status }}</strong>
+            </article>
+
+            <article>
+                <span>Vencimento</span>
+                <strong>{{ fatura.dataVencimento }}</strong>
+            </article>
+
+            <article>
+                <span>Valor</span>
+                <strong>R$ {{ "%.2f"|format(fatura.valor or 0) }}</strong>
+            </article>
+        </section>
+    </section>
+
+    <section class="portal-grid">
+        <article class="portal-panel">
+            <span class="portal-section-label">Cobrança</span>
+            <h2>Dados da fatura</h2>
+
+            <div class="portal-profile-card">
+                <span>Descrição</span>
+                <strong>{{ fatura.descricao }}</strong>
+
+                <span>Tipo</span>
+                <strong>{{ fatura.tipo }}</strong>
+
+                <span>Data de pagamento</span>
+                <strong>{{ fatura.dataPagamento or "Ainda não pago" }}</strong>
+            </div>
+        </article>
+
+        <article class="portal-panel">
+            <span class="portal-section-label">Cliente</span>
+            <h2>Dados do cliente</h2>
+
+            <div class="portal-profile-card">
+                <strong>{{ cliente.nome }}</strong>
+                <span>{{ cliente.email or "E-mail não informado" }}</span>
+                <span>{{ cliente.telefone or "Telefone não informado" }}</span>
+                <span>{{ cliente.documento or "Documento não informado" }}</span>
+            </div>
+        </article>
+    </section>
+</div>
+{% endblock %}

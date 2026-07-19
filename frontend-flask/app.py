@@ -11,7 +11,7 @@ from routes.movimentacoes_estoque_route import movimentacoes_estoque_bp
 from routes.empresa_route import empresas_bp
 from routes.relatorio_executivo_route import relatorio_executivo_bp
 from routes.financeiro_route import financeiro_bp
-from routes.portal_cliente_route import porta_cliente_bp
+from routes.portal_cliente_route import portal_cliente_bp
 
 app = Flask(__name__)
 
@@ -27,7 +27,7 @@ app.register_blueprint(movimentacoes_estoque_bp)
 app.register_blueprint(empresas_bp)
 app.register_blueprint(relatorio_executivo_bp)
 app.register_blueprint(financeiro_bp)
-app.register_blueprint(porta_cliente_bp)
+app.register_blueprint(portal_cliente_bp)
 
 if __name__ == "__main__" :
     app.run(debug=True, port=5000)
